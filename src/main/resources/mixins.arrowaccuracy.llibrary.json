@@ -6,7 +6,8 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "client": [
-    "llibrary.AdvancedModelRendererMixin"
+    "llibrary.AdvancedModelRendererMixin",
+    "llibrary.PartEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

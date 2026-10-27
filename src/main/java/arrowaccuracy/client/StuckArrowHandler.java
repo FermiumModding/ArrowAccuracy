@@ -4,12 +4,14 @@ import arrowaccuracy.ArrowAccuracy;
 import arrowaccuracy.handlers.ForgeConfigHandler;
 import arrowaccuracy.mixin.vanilla.RenderAccessor;
 import arrowaccuracy.util.IEntityArrow;
+import arrowaccuracy.util.IPartEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MultiPartEntityPart;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityShulker;
@@ -26,6 +28,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +40,14 @@ public class StuckArrowHandler {
 
 	private static final int SERVER_UPDATE_GRACE = 3;
 	private static final Map<EntityLivingBase,List<StuckArrow>> STUCK = new WeakHashMap<>();
+
+	@Nullable
+	public static EntityLivingBase getTarget(@Nullable Entity entity) {
+		if(entity instanceof EntityLivingBase) return (EntityLivingBase)entity;
+		if(entity instanceof MultiPartEntityPart && ((MultiPartEntityPart)entity).parent instanceof EntityLivingBase) return (EntityLivingBase)((MultiPartEntityPart)entity).parent;
+		if(entity instanceof IPartEntity) return ((IPartEntity)entity).arrowaccuracy$getParent();
+		return null;
+	}
 
 	public static void onClientHit(EntityArrow arrow, EntityLivingBase target) {
 		IEntityArrow holder = (IEntityArrow)arrow;
@@ -99,8 +110,9 @@ public class StuckArrowHandler {
 		EntityLivingBase hit = null;
 		double best = Double.MAX_VALUE;
 		AxisAlignedBB search = arrow.getEntityBoundingBox().expand(motion.x * 2.0D, motion.y * 2.0D, motion.z * 2.0D).grow(1.0D);
-		for(EntityLivingBase entity : arrow.world.getEntitiesWithinAABB(EntityLivingBase.class, search)) {
-			if(entity == arrow.shootingEntity || entity.isDead || (entity instanceof EntityPlayer && ((EntityPlayer)entity).isSpectator())) continue;
+		for(Entity entity : arrow.world.getEntitiesWithinAABBExcludingEntity(arrow, search)) {
+			EntityLivingBase target = getTarget(entity);
+			if(target == null || target == arrow.shootingEntity || target.isDead || (target instanceof EntityPlayer && ((EntityPlayer)target).isSpectator())) continue;
 			AxisAlignedBB box = entity.getEntityBoundingBox().grow(0.3D);
 			double dist;
 			if(box.contains(start)) dist = 0.0D;
@@ -111,7 +123,7 @@ public class StuckArrowHandler {
 			}
 			if(dist < best) {
 				best = dist;
-				hit = entity;
+				hit = target;
 			}
 		}
 		if(hit == null) return;

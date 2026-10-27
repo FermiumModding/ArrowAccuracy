@@ -37,8 +37,9 @@ public abstract class EntityArrowMixin extends Entity implements IEntityArrow {
 	private void arrowaccuracy_vanillaEntityArrow_onHit(RayTraceResult result, CallbackInfo ci) {
 		if(!this.world.isRemote) return;
 		this.arrowaccuracy$hitSomething = true;
-		if(result.entityHit instanceof EntityLivingBase) {
-			StuckArrowHandler.onClientHit((EntityArrow)(Object)this, (EntityLivingBase)result.entityHit);
+		EntityLivingBase target = StuckArrowHandler.getTarget(result.entityHit);
+		if(target != null) {
+			StuckArrowHandler.onClientHit((EntityArrow)(Object)this, target);
 		}
 	}
 
