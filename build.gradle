@@ -19,7 +19,7 @@ minecraft {
         client {
             args "--username=InDev"
 
-//            jvmArg "-Dfml.coreMods.load=${coremod_class}" //only use if you need a coremod
+            jvmArg "-Dfml.coreMods.load=${coremod_class}" //only use if you need a coremod
 //            jvmArg "-Dmixin.hotSwap=true" //funnily enough this breaks normal hotswapping. to hotswap mixins you need a special JVM like DCEVM
             jvmArg "-Dmixin.checks.interfaces=true"
             jvmArg "-Dmixin.debug.export=true"
@@ -32,7 +32,7 @@ minecraft {
 
         server {
 
-//            jvmArg "-Dfml.coreMods.load=${coremod_class}" //only use if you need a coremod
+            jvmArg "-Dfml.coreMods.load=${coremod_class}" //only use if you need a coremod
 //            jvmArg "-Dmixin.hotSwap=true"
             jvmArg "-Dmixin.checks.interfaces=true"
             jvmArg "-Dmixin.debug.export=true"
@@ -60,7 +60,6 @@ dependencies {
 
     implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
 	
-    implementation fg.deobf("curse.maven:jei-${jei_version}")
 }
 
 mixin {
@@ -105,8 +104,8 @@ jar {
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
 
         // --- only use if you need a coremod ---
-//            "FMLCorePlugin": coremod_class,
-//            "FMLCorePluginContainsFMLMod": "true", // this tells forge that you got both a normal @Mod AND a coremod
+            "FMLCorePlugin": coremod_class,
+            "FMLCorePluginContainsFMLMod": "true", // this tells forge that you got both a normal @Mod AND a coremod
 
         // ---
         // These will construct the coremod a bit later (tweaker stage, after plugin stage)
