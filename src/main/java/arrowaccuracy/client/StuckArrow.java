@@ -3,8 +3,6 @@ package arrowaccuracy.client;
 import arrowaccuracy.handlers.ForgeConfigHandler;
 import arrowaccuracy.util.ArrowMath;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBox;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -27,7 +25,7 @@ public class StuckArrow {
 	public int age = 0;
 	public boolean confirmed;
 	private boolean resolved = false;
-	private ModelRenderer part = null;
+	private Object part = null;
 	private Vec3d localPos;
 	private Vec3d localDir;
 
@@ -43,7 +41,7 @@ public class StuckArrow {
 		return this.resolved;
 	}
 
-	public void resolve(EntityLivingBase entity, Map<ModelRenderer,ModelCapture.CapturedPart> parts, Vec3d renderPos, float yaw) {
+	public void resolve(EntityLivingBase entity, Map<Object,ModelCapture.CapturedPart> parts, Vec3d renderPos, float yaw) {
 		float yawDelta = yaw - this.hitYaw;
 		Vec3d relOrigin = ArrowMath.rotateYaw(this.rayOrigin, yawDelta);
 		Vec3d dir = ArrowMath.rotateYaw(this.rayDir, yawDelta);
@@ -52,19 +50,17 @@ public class StuckArrow {
 		if(!this.resolveModel(parts, relOrigin.add(renderPos), dir)) this.resolveBB(entity, relOrigin, dir, yaw);
 	}
 
-	private boolean resolveModel(Map<ModelRenderer,ModelCapture.CapturedPart> parts, Vec3d origin, Vec3d dir) {
+	private boolean resolveModel(Map<Object,ModelCapture.CapturedPart> parts, Vec3d origin, Vec3d dir) {
 		Candidate best = null;
-		for(Map.Entry<ModelRenderer,ModelCapture.CapturedPart> entry : parts.entrySet()) {
-			ModelRenderer part = entry.getKey();
+		for(Map.Entry<Object,ModelCapture.CapturedPart> entry : parts.entrySet()) {
+			Object part = entry.getKey();
 			ModelCapture.CapturedPart captured = entry.getValue();
-			if(part.cubeList.isEmpty() || captured.getFromWorld() == null) continue;
+			if(captured.getBounds().isEmpty() || captured.getFromWorld() == null) continue;
 
 			Vec3d localOrigin = ArrowMath.transform(captured.getFromWorld(), origin, 1.0D);
 			Vec3d localDir = ArrowMath.transform(captured.getFromWorld(), dir, 0.0D);
-			float scale = captured.scale;
 
-			for(ModelBox box : part.cubeList) {
-				AxisAlignedBB bounds = new AxisAlignedBB(box.posX1 * scale, box.posY1 * scale, box.posZ1 * scale, box.posX2 * scale, box.posY2 * scale, box.posZ2 * scale);
+			for(AxisAlignedBB bounds : captured.getBounds()) {
 				Candidate candidate = new Candidate(part, captured, ArrowMath.impact(bounds, localOrigin, localDir), localDir);
 				if(best == null || candidate.beats(best)) best = candidate;
 			}
@@ -90,7 +86,7 @@ public class StuckArrow {
 		this.localDir = ArrowMath.rotateYaw(dir, -yaw);
 	}
 
-	public void render(Map<ModelRenderer,ModelCapture.CapturedPart> parts, Vec3d renderPos, float yaw, float partialTicks) {
+	public void render(Map<Object,ModelCapture.CapturedPart> parts, Vec3d renderPos, float yaw, float partialTicks) {
 		int duration = ForgeConfigHandler.CLIENT.stuckArrowDuration;
 		int fade = Math.min(ForgeConfigHandler.CLIENT.fadeOutDuration, duration);
 		float remaining = duration - (this.age + partialTicks);
@@ -144,12 +140,12 @@ public class StuckArrow {
 	}
 
 	private static class Candidate {
-		private final ModelRenderer part;
+		private final Object part;
 		private final ArrowMath.Impact impact;
 		private final Vec3d localDir;
 		private final double score;
 
-		private Candidate(ModelRenderer part, ModelCapture.CapturedPart captured, ArrowMath.Impact impact, Vec3d localDir) {
+		private Candidate(Object part, ModelCapture.CapturedPart captured, ArrowMath.Impact impact, Vec3d localDir) {
 			this.part = part;
 			this.impact = impact;
 			this.localDir = localDir;

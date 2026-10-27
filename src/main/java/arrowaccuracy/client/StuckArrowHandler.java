@@ -5,7 +5,6 @@ import arrowaccuracy.handlers.ForgeConfigHandler;
 import arrowaccuracy.mixin.vanilla.RenderAccessor;
 import arrowaccuracy.util.IEntityArrow;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -186,7 +185,7 @@ public class StuckArrowHandler {
  
 	public static void endRender(EntityLivingBase entity, double x, double y, double z, float partialTicks) {
 		if(!ModelCapture.isCapturing(entity)) return;
-		Map<ModelRenderer,ModelCapture.CapturedPart> parts = ModelCapture.end();
+		Map<Object,ModelCapture.CapturedPart> parts = ModelCapture.end();
 		List<StuckArrow> list = STUCK.get(entity);
 		if(list == null || list.isEmpty()) return;
 

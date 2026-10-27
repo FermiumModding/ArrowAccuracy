@@ -13,6 +13,10 @@ public class ArrowAccuracyPlugin implements IFMLLoadingPlugin {
 
 	public ArrowAccuracyPlugin() {
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.arrowaccuracy.vanilla.json");
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.arrowaccuracy.llibrary.json", () -> FermiumRegistryAPI.isModPresent("llibrary"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.arrowaccuracy.mobends.json", () -> FermiumRegistryAPI.isModPresent("mobends"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.arrowaccuracy.azurelib.json", () -> FermiumRegistryAPI.isModPresent("azurelib"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.arrowaccuracy.geckolib.json", () -> FermiumRegistryAPI.isModPresent("geckolib3"));
 	}
 
 	@Override

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "arrowaccuracy.mixin",
+  "refmap": "mixins.arrowaccuracy.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "client": [
+    "mobends.ModelPartExtendedMixin",
+    "mobends.ModelPartMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
