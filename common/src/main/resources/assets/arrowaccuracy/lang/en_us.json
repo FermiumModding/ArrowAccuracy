@@ -1,0 +1,15 @@
+{
+  "text.autoconfig.arrowaccuracy.title": "ArrowAccuracy Config",
+
+  "text.autoconfig.arrowaccuracy.option.stuckArrowDuration": "Stuck Arrow Duration",
+  "text.autoconfig.arrowaccuracy.option.stuckArrowDuration.@Tooltip": "Ticks an arrow stays stuck in an entity (1-72000)",
+  "text.autoconfig.arrowaccuracy.option.fadeOutDuration": "Fade Out Duration",
+  "text.autoconfig.arrowaccuracy.option.fadeOutDuration.@Tooltip": "Ticks at the end of the stuck duration the arrow spends fading out, 0 disables fading (0-72000)",
+  "text.autoconfig.arrowaccuracy.option.maxArrowsPerEntity": "Max Arrows Per Entity",
+  "text.autoconfig.arrowaccuracy.option.maxArrowsPerEntity.@Tooltip": "Maximum amount of arrows rendered in a single entity, oldest arrows are removed first",
+  "text.autoconfig.arrowaccuracy.option.hitConfirmationTimeout": "Hit Confirmation Timeout",
+  "text.autoconfig.arrowaccuracy.option.hitConfirmationTimeout.@Tooltip[0]": "Ticks a stuck arrow waits for the server to confirm the hit by removing the arrow entity",
+  "text.autoconfig.arrowaccuracy.option.hitConfirmationTimeout.@Tooltip[1]": "Raise if high ping causes stuck arrows to vanish",
+  "text.autoconfig.arrowaccuracy.option.hideVanillaArrows": "Hide Vanilla Player Arrows",
+  "text.autoconfig.arrowaccuracy.option.hideVanillaArrows.@Tooltip": "Hides the vanilla randomly placed arrows rendered in players"
+}

@@ -1,0 +1,37 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://www.curseforge.com/members/fonnymunkey/projects"
+    },
+    "license": "${license}",
+    "icon": "icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "arrowaccuracy.ArrowAccuracyFabric"
+        ],
+        "modmenu": [
+            "arrowaccuracy.compat.ModMenuPlugin"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.geckolib.mixins.json",
+        "${mod_id}.azurelib.mixins.json",
+        "${mod_id}.uranus.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}",
+        "cloth-config": ">=${cloth_version}"
+    }
+}
