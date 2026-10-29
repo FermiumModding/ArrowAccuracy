@@ -57,7 +57,7 @@ public abstract class AbstractArrowMixin extends Entity implements IAbstractArro
 			method = "lerpTo",
 			at = @At("HEAD")
 	)
-	private void arrowaccuracy_vanillaAbstractArrow_lerpTo(double x, double y, double z, float yRot, float xRot, int steps, boolean teleport, CallbackInfo ci) {
+	private void arrowaccuracy_vanillaAbstractArrow_lerpTo(double x, double y, double z, float yRot, float xRot, int steps, CallbackInfo ci) {
 		StuckArrowHandler.onServerPositionUpdate((AbstractArrow)(Object)this);
 	}
 

@@ -1,10 +1,10 @@
 package arrowaccuracy.compat;
 
 import arrowaccuracy.client.ModelCapture;
-import mod.azure.azurelib.cache.object.GeoCube;
-import mod.azure.azurelib.cache.object.GeoQuad;
-import mod.azure.azurelib.cache.object.GeoVertex;
-import mod.azure.azurelib.render.AzRendererPipelineContext;
+import mod.azure.azurelib.common.cache.object.GeoCube;
+import mod.azure.azurelib.common.cache.object.GeoQuad;
+import mod.azure.azurelib.common.cache.object.GeoVertex;
+import mod.azure.azurelib.common.render.AzRendererPipelineContext;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 import org.joml.Matrix4f;

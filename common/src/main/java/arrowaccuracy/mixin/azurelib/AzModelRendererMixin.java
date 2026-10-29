@@ -1,9 +1,9 @@
 package arrowaccuracy.mixin.azurelib;
 
 import arrowaccuracy.compat.AzureLibCompat;
-import mod.azure.azurelib.cache.object.GeoCube;
-import mod.azure.azurelib.render.AzModelRenderer;
-import mod.azure.azurelib.render.AzRendererPipelineContext;
+import mod.azure.azurelib.common.cache.object.GeoCube;
+import mod.azure.azurelib.common.render.AzModelRenderer;
+import mod.azure.azurelib.common.render.AzRendererPipelineContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

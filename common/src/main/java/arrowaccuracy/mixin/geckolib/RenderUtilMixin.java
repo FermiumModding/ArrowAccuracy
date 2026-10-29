@@ -7,16 +7,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import software.bernie.geckolib.cache.object.GeoCube;
-import software.bernie.geckolib.util.RenderUtils;
+import software.bernie.geckolib.util.RenderUtil;
 
-@Mixin(value = RenderUtils.class, remap = false)
-public abstract class RenderUtilsMixin {
+@Mixin(value = RenderUtil.class, remap = false)
+public abstract class RenderUtilMixin {
 
 	@Inject(
 			method = "rotateMatrixAroundCube",
 			at = @At("RETURN")
 	)
-	private static void arrowaccuracy_geckolibRenderUtils_rotateMatrixAroundCube(PoseStack poseStack, GeoCube cube, CallbackInfo ci) {
+	private static void arrowaccuracy_geckolibRenderUtil_rotateMatrixAroundCube(PoseStack poseStack, GeoCube cube, CallbackInfo ci) {
 		GeckoLibCompat.onCubeRender(poseStack, cube);
 	}
 }

@@ -3,9 +3,9 @@ package arrowaccuracy.platform;
 import arrowaccuracy.platform.services.IPlatformHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.entity.PartEntity;
+import net.neoforged.neoforge.entity.PartEntity;
 
-public class ForgePlatformHelper implements IPlatformHelper {
+public class NeoForgePlatformHelper implements IPlatformHelper {
 
 	@Override
 	public LivingEntity getMultipartParent(Entity entity) {

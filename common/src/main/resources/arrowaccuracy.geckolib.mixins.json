@@ -4,10 +4,10 @@
   "package": "arrowaccuracy.mixin",
   "plugin": "arrowaccuracy.compat.GeckoLibMixinPlugin",
   "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [
-    "geckolib.RenderUtilsMixin"
+    "geckolib.RenderUtilMixin"
   ],
   "server": [],
   "injectors": {

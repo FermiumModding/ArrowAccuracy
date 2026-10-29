@@ -17,7 +17,7 @@ public abstract class AdvancedModelBoxMixin {
 			method = "doRender",
 			at = @At("HEAD")
 	)
-	private void arrowaccuracy_uranusAdvancedModelBox_doRender(PoseStack.Pose pose, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, CallbackInfo ci) {
+	private void arrowaccuracy_uranusAdvancedModelBox_doRender(PoseStack.Pose pose, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color, CallbackInfo ci) {
 		if(ModelCapture.isCapturingModel()) {
 			UranusCompat.onBoxRender((AdvancedModelBox)(Object)this, pose.pose());
 		}

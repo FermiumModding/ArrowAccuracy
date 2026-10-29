@@ -24,10 +24,10 @@ public abstract class ModelPartMixin {
 	private List<ModelPart.Cube> cubes;
 
 	@Inject(
-			method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V",
+			method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V",
 			at = @At("HEAD")
 	)
-	private void arrowaccuracy_vanillaModelPart_render(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, CallbackInfo ci) {
+	private void arrowaccuracy_vanillaModelPart_render(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color, CallbackInfo ci) {
 		if(this.visible && !this.cubes.isEmpty() && ModelCapture.isCapturingModel()) {
 			ModelCapture.onModelPartRender((ModelPart)(Object)this, this.cubes, poseStack);
 		}
