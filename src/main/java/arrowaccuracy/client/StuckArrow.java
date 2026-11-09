@@ -105,6 +105,8 @@ public class StuckArrow {
 			pos = ArrowMath.rotateYaw(this.localPos, yaw).add(renderPos);
 			dir = ArrowMath.rotateYaw(this.localDir, yaw).normalize();
 		}
+		double depth = ForgeConfigHandler.CLIENT.arrowRenderDepth;
+		if(depth != 0.0D) pos = pos.add(dir.scale(depth));
 		float arrowYaw = (float)(MathHelper.atan2(dir.x, dir.z) * (180D / Math.PI));
 		float arrowPitch = (float)(MathHelper.atan2(dir.y, Math.sqrt(dir.x * dir.x + dir.z * dir.z)) * (180D / Math.PI));
 		float[] previous = { this.arrow.rotationYaw, this.arrow.prevRotationYaw, this.arrow.rotationPitch, this.arrow.prevRotationPitch };

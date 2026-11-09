@@ -26,6 +26,11 @@ public class ForgeConfigHandler {
 		@Config.RangeInt(min = 0, max = 72000)
 		public int fadeOutDuration = 20;
 
+		@Config.Comment("Distance in blocks stuck arrows are rendered past the impact point, pushing them deeper into the model. Negative values pull them outward.")
+		@Config.Name("Arrow Render Depth")
+		@Config.RangeDouble(min = -1.0D, max = 1.0D)
+		public double arrowRenderDepth = 0.05D;
+
 		@Config.Comment("Maximum amount of arrows rendered in a single entity. Oldest arrows are removed first.")
 		@Config.Name("Max Arrows Per Entity")
 		@Config.RangeInt(min = 1, max = 256)
