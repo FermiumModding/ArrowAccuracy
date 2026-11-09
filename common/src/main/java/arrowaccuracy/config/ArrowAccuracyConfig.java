@@ -15,6 +15,9 @@ public class ArrowAccuracyConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip
 	public int fadeOutDuration = 20;
 
+	@ConfigEntry.Gui.Tooltip(count = 2)
+	public double arrowRenderDepth = 0.05D;
+
 	@ConfigEntry.Gui.Tooltip
 	@ConfigEntry.BoundedDiscrete(min = 1, max = 256)
 	public int maxArrowsPerEntity = 16;
@@ -30,6 +33,7 @@ public class ArrowAccuracyConfig implements ConfigData {
 	public void validatePostLoad() {
 		this.stuckArrowDuration = Mth.clamp(this.stuckArrowDuration, 1, 72000);
 		this.fadeOutDuration = Mth.clamp(this.fadeOutDuration, 0, 72000);
+		this.arrowRenderDepth = Mth.clamp(this.arrowRenderDepth, -1.0D, 1.0D);
 		this.maxArrowsPerEntity = Mth.clamp(this.maxArrowsPerEntity, 1, 256);
 		this.hitConfirmationTimeout = Mth.clamp(this.hitConfirmationTimeout, 1, 200);
 	}
