@@ -9,7 +9,6 @@
     "vanilla.EntityArrowMixin",
     "vanilla.LayerArrowMixin",
     "vanilla.ModelBoxAccessor",
-    "vanilla.ModelRendererMixin",
     "vanilla.RenderAccessor",
     "vanilla.RenderManagerMixin",
     "vanilla.WorldClientMixin"

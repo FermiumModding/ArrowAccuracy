@@ -64,6 +64,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:mobends-${mobends_version}")
     compileOnly fg.deobf("curse.maven:azurelib-${azurelib_version}")
     compileOnly fg.deobf("curse.maven:geckolib-${geckolib_version}")
+    compileOnly fg.deobf("blank:FastEntityRender-1.12.2:${fastentityrender_version}")
 }
 
 mixin {

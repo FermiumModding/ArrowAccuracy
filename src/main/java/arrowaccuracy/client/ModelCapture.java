@@ -43,6 +43,16 @@ public abstract class ModelCapture {
 		CAPTURED.put(part, new CapturedPart(toWorld(null), () -> getBounds(part, scale)));
 	}
 
+	//FER compat
+	public static void onPartRender(ModelRenderer part, float scale, Matrix4f pose) {
+		if(entity == null || !PARTS.contains(part)) return;
+		CAPTURED.put(part, new CapturedPart(toWorld(pose), () -> getBounds(part, scale)));
+	}
+
+	public static boolean isCapturingPart(Object part) {
+		return entity != null && PARTS.contains(part);
+	}
+
 	public static void onPoseRender(Object part, Matrix4f pose, Supplier<List<AxisAlignedBB>> bounds) {
 		if(entity == null) return;
 		CAPTURED.put(part, new CapturedPart(toWorld(pose), bounds));
