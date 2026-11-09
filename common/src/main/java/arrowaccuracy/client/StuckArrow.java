@@ -107,6 +107,8 @@ public class StuckArrow {
 			pos = ArrowMath.rotateYaw(this.localPos, yaw).add(renderPos);
 			dir = ArrowMath.rotateYaw(this.localDir, yaw).normalize();
 		}
+		double depth = ConfigHandler.CONFIG.arrowRenderDepth;
+		if(depth != 0.0D) pos = pos.add(dir.scale(depth));
 		float arrowYaw = (float)(Mth.atan2(dir.x, dir.z) * (180D / Math.PI));
 		float arrowPitch = (float)(Mth.atan2(dir.y, Math.sqrt(dir.x * dir.x + dir.z * dir.z)) * (180D / Math.PI));
 		float[] previous = { this.arrow.getYRot(), this.arrow.yRotO, this.arrow.getXRot(), this.arrow.xRotO };
